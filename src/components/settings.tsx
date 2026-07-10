@@ -60,7 +60,7 @@ export default function SettingsPanel({
         </Field>
 
         {sliders.map((s) => (
-          <Field key={s.key} label={s.label}>
+          <Field key={String(s.key)} label={s.label}>
             <div className="flex items-center gap-2">
               <input
                 type="range"

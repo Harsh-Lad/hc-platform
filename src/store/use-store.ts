@@ -161,11 +161,13 @@ export const useStore = create<Store>()(
     {
       name: "hc-platform-store",
       storage: createJSONStorage(() => localStorage),
-      partialize: (s) => ({
+      partialize: (s: Store) => ({
         conversations: s.conversations,
         activeId: s.activeId,
         settings: s.settings,
       }),
     }
+  )
+);
   )
 );

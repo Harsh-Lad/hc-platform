@@ -46,7 +46,8 @@ export default function Chat({ onMenuClick }: { onMenuClick?: () => void }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null);
 
   const chat = s.active();
   const model = chat?.model ?? MODELS[0].id;
@@ -89,8 +90,9 @@ export default function Chat({ onMenuClick }: { onMenuClick?: () => void }) {
       return;
     }
 
-    const SR = (window as unknown as { SpeechRecognition?: typeof SpeechRecognition; webkitSpeechRecognition?: typeof SpeechRecognition }).SpeechRecognition
-      || (window as unknown as { webkitSpeechRecognition?: typeof SpeechRecognition }).webkitSpeechRecognition;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
     if (!SR) {
       alert("Speech recognition not supported in this browser. Use Chrome or Edge.");
       return;
@@ -104,7 +106,8 @@ export default function Chat({ onMenuClick }: { onMenuClick?: () => void }) {
 
     let finalTranscript = "";
 
-    rec.onresult = (e: SpeechRecognitionEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (e: any) => {
       let interim = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
         const t = e.results[i][0].transcript;
