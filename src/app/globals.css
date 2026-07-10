@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-2: #1a1a1a;
+  --color-surface-3: #222222;
+  --color-edge: #2a2a2a;
+  --color-edge-2: #333333;
+  --color-primary: #e8e8e8;
+  --color-muted: #777777;
+  --color-dim: #555555;
+  --color-violet: #8b5cf6;
+  --color-violet-light: #a78bfa;
+  --color-violet-bg: rgba(139, 92, 246, 0.12);
+}
+
+:root { color-scheme: dark; }
+
+body {
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", "JetBrains Mono",
+    ui-monospace, monospace;
+  background: var(--color-bg);
+  color: var(--color-primary);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-edge); border-radius: 3px; }
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim-fade-up { animation: fade-up 0.2s ease-out; }
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.streaming-cursor::after {
+  content: "▊";
+  color: var(--color-violet);
+  animation: blink-cursor 0.7s step-end infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.pulse-glow { animation: pulse-glow 1s infinite; }
+
+/* Hide scrollbar */
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* Markdown prose */
+.prose-chat h1, .prose-chat h2, .prose-chat h3 {
+  margin: 14px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-violet-light);
+}
+.prose-chat p { margin-bottom: 10px; }
+.prose-chat p:last-child { margin-bottom: 0; }
+.prose-chat ul, .prose-chat ol { padding-left: 18px; margin: 8px 0; }
+.prose-chat li { margin-bottom: 3px; }
+.prose-chat strong { color: var(--color-violet-light); }
+.prose-chat a { color: #3b82f6; }
+.prose-chat a:hover { text-decoration: underline; }
+.prose-chat blockquote {
+  border-left: 2px solid var(--color-edge-2);
+  padding-left: 10px;
+  color: var(--color-muted);
+  margin: 8px 0;
+}
+.prose-chat table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+.prose-chat th, .prose-chat td {
+  border: 1px solid var(--color-edge);
+  padding: 5px 10px;
+  font-size: 12px;
+  text-align: left;
+}
+.prose-chat th { background: var(--color-surface-2); color: var(--color-violet-light); }
+.prose-chat img { max-width: 100%; border-radius: 8px; }
