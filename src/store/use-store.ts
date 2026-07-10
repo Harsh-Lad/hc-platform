@@ -169,5 +169,3 @@ export const useStore = create<Store>()(
     }
   )
 );
-  )
-);
